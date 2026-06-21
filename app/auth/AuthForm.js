@@ -23,11 +23,12 @@ export default function AuthForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/auth/login", {
+      const response = await fetch("{process.env.NEXT_PUBLIC_API_URL}/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 
@@ -41,7 +42,6 @@ export default function AuthForm() {
       const data = await response.json();
       console.log("Logged in:", data);
       // I need data.token
-      localStorage.setItem("token", data.token);
 
       setErrors((prev) => ({ ...prev, form: "" }));
     } catch (err) {
@@ -68,11 +68,12 @@ export default function AuthForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/auth/signup", {
+      const response = await fetch("{process.env.NEXT_PUBLIC_API_URL}/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 
